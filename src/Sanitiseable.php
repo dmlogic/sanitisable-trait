@@ -11,6 +11,10 @@ trait Sanitiseable {
     protected $allowed;
     protected $return = [];
 
+    public function __construct($data,$allowed) {
+        $this->setData($data,$allowed);
+    }
+
     /**
      * Set the values we need
      *
@@ -27,14 +31,23 @@ trait Sanitiseable {
      * Factory helper
      *
      * @param  array $data
-     * @return User
+     * @return array
      */
     public static function cleanData($data,$allowed)
     {
-        $cls = new static;
-        $cls->setData($data,$allowed);
-        $cls->performSanitise();
-        return $cls->return;
+        $cls = new static($data,$allowed);
+        return $cls->clean();
+    }
+
+    /**
+     * Public interface if we don't want to use the factory
+     *
+     * @return array
+     */
+    public function clean()
+    {
+        $this->performSanitise();
+        return $this->return;
     }
 
     /**
