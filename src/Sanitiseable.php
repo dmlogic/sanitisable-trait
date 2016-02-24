@@ -91,21 +91,21 @@ trait Sanitiseable {
 
     }
 
-    protected function sanitiseEmail($value) {
+    public function sanitiseEmail($value) {
         return trim(filter_var($value,FILTER_SANITIZE_EMAIL));
     }
 
-    protected function sanitiseString($value)
+    public function sanitiseString($value)
     {
         return trim(filter_var($value,FILTER_SANITIZE_STRING));
     }
 
-    protected function sanitiseBoolean($value)
+    public function sanitiseBoolean($value)
     {
         return (bool) $value;
     }
 
-    protected function sanitiseInteger($value)
+    public function sanitiseInteger($value)
     {
         return (int) $value;
     }
@@ -146,7 +146,7 @@ trait Sanitiseable {
         return $ret;
     }
 
-    private function sanitiseUpload($value)
+    public function sanitiseUpload($value)
     {
         if(!$value instanceof UploadedFile) {
             return null;
