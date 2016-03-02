@@ -11,10 +11,6 @@ trait Sanitiseable {
     protected $allowed;
     protected $return = [];
 
-    public function __construct($data,$allowed) {
-        $this->setData($data,$allowed);
-    }
-
     /**
      * Set the values we need
      *
@@ -35,7 +31,8 @@ trait Sanitiseable {
      */
     public static function cleanData($data,$allowed)
     {
-        $cls = new static($data,$allowed);
+        $cls = new static;
+        $cls->setData($data,$allowed);
         return $cls->clean();
     }
 
